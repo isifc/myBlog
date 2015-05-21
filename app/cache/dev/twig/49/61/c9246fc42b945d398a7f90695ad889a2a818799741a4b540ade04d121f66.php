@@ -75,18 +75,23 @@ class __TwigTemplate_4961c9246fc42b945d398a7f90695ad889a2a818799741a4b540ade04d1
         </a>
     </div>
 </div>
+
 ";
     }
 
-    // line 30
+    // line 31
     public function block_javascript($context, array $blocks = array())
     {
-        // line 31
-        echo "    ";
+        // line 32
+        echo "    
+        \$(\"#home_backendbundle_post_categories\").select2();
+    
+    ";
+        // line 35
         $this->displayParentBlock("javascript", $context, $blocks);
         echo "
     <script src=\"";
-        // line 32
+        // line 36
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mwsimplecrudgenerator/js/widget.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -104,6 +109,6 @@ class __TwigTemplate_4961c9246fc42b945d398a7f90695ad889a2a818799741a4b540ade04d1
 
     public function getDebugInfo()
     {
-        return array (  90 => 32,  85 => 31,  82 => 30,  73 => 24,  69 => 23,  60 => 17,  52 => 12,  47 => 9,  44 => 8,  41 => 7,  33 => 4,  30 => 3,  11 => 1,);
+        return array (  95 => 36,  91 => 35,  86 => 32,  83 => 31,  73 => 24,  69 => 23,  60 => 17,  52 => 12,  47 => 9,  44 => 8,  41 => 7,  33 => 4,  30 => 3,  11 => 1,);
     }
 }

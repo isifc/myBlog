@@ -7,10 +7,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * PostType form.
+ * CategoryType form.
  * @author Nombre Apellido <name@gmail.com>
  */
-class PostType extends AbstractType
+class CategoryType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -19,11 +19,8 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('title')
-            ->add('content')
-            ->add('date')
-            ->add('categories')
+            ->add('denominacion')
+            ->add('posts')
         ;
     }
     
@@ -33,7 +30,7 @@ class PostType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Home\BackendBundle\Entity\Post'
+            'data_class' => 'Home\BackendBundle\Entity\Category'
         ));
     }
 
@@ -42,6 +39,6 @@ class PostType extends AbstractType
      */
     public function getName()
     {
-        return 'home_backendbundle_post';
+        return 'home_backendbundle_category';
     }
 }

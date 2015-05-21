@@ -23,6 +23,7 @@
       <parameter key="HomeBackendBundle">Home\BackendBundle\HomeBackendBundle</parameter>
       <parameter key="HomeFrontendBundle">Home\FrontendBundle\HomeFrontendBundle</parameter>
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
+      <parameter key="PinanoSelect2Bundle">Pinano\Select2Bundle\PinanoSelect2Bundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="AcmeDemoBundle">Acme\DemoBundle\AcmeDemoBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
@@ -43,7 +44,6 @@
     <parameter key="mailer_password">null</parameter>
     <parameter key="locale">es</parameter>
     <parameter key="secret">c653f7f34e6d86c84c9235d0030eb2abba5de763</parameter>
-    <parameter key="database_path">null</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
     <parameter key="response_listener.class">Symfony\Component\HttpKernel\EventListener\ResponseListener</parameter>
@@ -331,7 +331,6 @@
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
       <parameter>LexikFormFilterBundle:Form:form_div_layout.html.twig</parameter>
-      <parameter>bootstrap_3_horizontal_layout.html.twig</parameter>
     </parameter>
     <parameter key="debug.templating.engine.twig.class">Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine</parameter>
     <parameter key="twig.options" type="collection">
@@ -341,7 +340,6 @@
       <parameter key="form_themes" type="collection">
         <parameter>form_div_layout.html.twig</parameter>
         <parameter>LexikFormFilterBundle:Form:form_div_layout.html.twig</parameter>
-        <parameter>bootstrap_3_horizontal_layout.html.twig</parameter>
       </parameter>
       <parameter key="autoescape" type="collection">
         <parameter>Symfony\Bundle\TwigBundle\TwigDefaultEscapingStrategy</parameter>
@@ -616,7 +614,7 @@
       <parameter key="webmaster@example.com">webmaster</parameter>
     </parameter>
     <parameter key="fos_user.registration.confirmation.enabled">false</parameter>
-    <parameter key="fos_user.registration.form.type">fos_user_registration</parameter>
+    <parameter key="fos_user.registration.form.type">home_user_registration</parameter>
     <parameter key="fos_user.registration.form.name">fos_user_registration_form</parameter>
     <parameter key="fos_user.registration.form.validation_groups" type="collection">
       <parameter>Registration</parameter>
@@ -714,6 +712,9 @@
     </parameter>
   </parameters>
   <services>
+    <service id="home_user.registration.form.type" class="Home\BackendBundle\Form\RegistrationFormType">
+      <tag name="form.type" alias="home_user_registration"/>
+    </service>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
@@ -2364,6 +2365,7 @@
           <service class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
             <argument type="service" id="service_container"/>
             <argument type="collection">
+              <argument key="home_user_registration">home_user.registration.form.type</argument>
               <argument key="form">form.type.form</argument>
               <argument key="birthday">form.type.birthday</argument>
               <argument key="checkbox">form.type.checkbox</argument>
@@ -3197,7 +3199,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>554c1feb8ee30</argument>
+            <argument>555d32cb23bb1</argument>
           </service>
         </argument>
       </argument>
@@ -3476,7 +3478,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>554c1feb8ee30</argument>
+            <argument>555d32cb23bb1</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -3577,7 +3579,6 @@
         <argument key="form_themes" type="collection">
           <argument>form_div_layout.html.twig</argument>
           <argument>LexikFormFilterBundle:Form:form_div_layout.html.twig</argument>
-          <argument>bootstrap_3_horizontal_layout.html.twig</argument>
         </argument>
         <argument key="autoescape" type="collection">
           <argument>Symfony\Bundle\TwigBundle\TwigDefaultEscapingStrategy</argument>
@@ -3688,7 +3689,6 @@
                     <argument type="collection">
                       <argument>form_div_layout.html.twig</argument>
                       <argument>LexikFormFilterBundle:Form:form_div_layout.html.twig</argument>
-                      <argument>bootstrap_3_horizontal_layout.html.twig</argument>
                     </argument>
                   </service>
                 </argument>
@@ -4287,7 +4287,7 @@
     <service id="fos_user.registration.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
       <argument type="service" id="form.factory"/>
       <argument>fos_user_registration_form</argument>
-      <argument>fos_user_registration</argument>
+      <argument>home_user_registration</argument>
       <argument type="collection">
         <argument>Registration</argument>
         <argument>Default</argument>

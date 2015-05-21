@@ -127,17 +127,98 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/hello')) {
-            // home_frontend_default_index
-            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'home_frontend_default_index')), array (  '_controller' => 'Home\\FrontendBundle\\Controller\\DefaultController::indexAction',));
-            }
+        // home_frontend_default_index
+        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'home_frontend_default_index')), array (  '_controller' => 'Home\\FrontendBundle\\Controller\\DefaultController::indexAction',));
+        }
 
-            // home_backend_default_index
-            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'home_backend_default_index')), array (  '_controller' => 'Home\\BackendBundle\\Controller\\DefaultController::indexAction',));
-            }
+        if (0 === strpos($pathinfo, '/admin/category')) {
+            // admin_category
+            if (rtrim($pathinfo, '/') === '/admin/category') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_admin_category;
+                }
 
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'admin_category');
+                }
+
+                return array (  '_controller' => 'Home\\BackendBundle\\Controller\\CategoryController::indexAction',  '_route' => 'admin_category',);
+            }
+            not_admin_category:
+
+            // admin_category_create
+            if ($pathinfo === '/admin/category/') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_admin_category_create;
+                }
+
+                return array (  '_controller' => 'Home\\BackendBundle\\Controller\\CategoryController::createAction',  '_route' => 'admin_category_create',);
+            }
+            not_admin_category_create:
+
+            // admin_category_new
+            if ($pathinfo === '/admin/category/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_admin_category_new;
+                }
+
+                return array (  '_controller' => 'Home\\BackendBundle\\Controller\\CategoryController::newAction',  '_route' => 'admin_category_new',);
+            }
+            not_admin_category_new:
+
+            // admin_category_show
+            if (preg_match('#^/admin/category/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_admin_category_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_category_show')), array (  '_controller' => 'Home\\BackendBundle\\Controller\\CategoryController::showAction',));
+            }
+            not_admin_category_show:
+
+            // admin_category_edit
+            if (preg_match('#^/admin/category/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_admin_category_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_category_edit')), array (  '_controller' => 'Home\\BackendBundle\\Controller\\CategoryController::editAction',));
+            }
+            not_admin_category_edit:
+
+            // admin_category_update
+            if (preg_match('#^/admin/category/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'PUT') {
+                    $allow[] = 'PUT';
+                    goto not_admin_category_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_category_update')), array (  '_controller' => 'Home\\BackendBundle\\Controller\\CategoryController::updateAction',));
+            }
+            not_admin_category_update:
+
+            // admin_category_delete
+            if (preg_match('#^/admin/category/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_admin_category_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_category_delete')), array (  '_controller' => 'Home\\BackendBundle\\Controller\\CategoryController::deleteAction',));
+            }
+            not_admin_category_delete:
+
+        }
+
+        // home_backend_default_index
+        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'home_backend_default_index')), array (  '_controller' => 'Home\\BackendBundle\\Controller\\DefaultController::indexAction',));
         }
 
         if (0 === strpos($pathinfo, '/a')) {

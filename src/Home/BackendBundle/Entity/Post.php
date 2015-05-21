@@ -49,6 +49,10 @@ class Post
      */
     private $date;
 
+     /**
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="posts", cascade={"persist"})
+     */
+    private $categories;
 
     /**
      * Get id
@@ -150,5 +154,49 @@ class Post
     public function getDate()
     {
         return $this->date;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \Home\BackendBundle\Entity\Category $categories
+     * @return Post
+     */
+    public function addCategory(\Home\BackendBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \Home\BackendBundle\Entity\Category $categories
+     */
+    public function removeCategory(\Home\BackendBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    public function __toString(){
+        return $this->name;
     }
 }

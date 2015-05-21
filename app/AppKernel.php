@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Home\BackendBundle\HomeBackendBundle(),
             new Home\FrontendBundle\HomeFrontendBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Pinano\Select2Bundle\PinanoSelect2Bundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

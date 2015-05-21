@@ -49,6 +49,10 @@ class Post
      */
     private $date;
 
+     /**
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="posts", cascade={"persist"})
+     */
+    private $categories;
 
     /**
      * Get id

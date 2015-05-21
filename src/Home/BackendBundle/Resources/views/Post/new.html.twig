@@ -25,9 +25,13 @@
         </a>
     </div>
 </div>
+
 {% endblock %}
     
 {% block javascript %}
+    <script>
+        $("#home_backendbundle_post_categories").select2();
+    </script>
     {{ parent() }}
     <script src="{{ asset('bundles/mwsimplecrudgenerator/js/widget.js') }}"></script>
 {% endblock %}

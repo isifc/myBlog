@@ -33,7 +33,7 @@ twig:
     form:
         resources:
             - LexikFormFilterBundle:Form:form_div_layout.html.twig
-            - 'bootstrap_3_horizontal_layout.html.twig'
+            
 
 # Assetic Configuration
 assetic:
@@ -73,6 +73,9 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Home\BackendBundle\Entity\User
+    registration:
+        form:
+            type: home_user_registration
 
 
 

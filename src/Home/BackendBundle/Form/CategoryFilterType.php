@@ -10,10 +10,10 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormError;
 
 /**
- * PostFilterType filtro.
+ * CategoryFilterType filtro.
  * @author Nombre Apellido <name@gmail.com>
  */
-class PostFilterType extends AbstractType
+class CategoryFilterType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -22,16 +22,7 @@ class PostFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'filter_text',array(
-                        'attr'=> array('class'=>'form-control')
-                    ))
-            ->add('title', 'filter_text',array(
-                        'attr'=> array('class'=>'form-control')
-                    ))
-            ->add('content', 'filter_text',array(
-                        'attr'=> array('class'=>'form-control')
-                    ))
-            ->add('date', 'filter_date_range',array(
+            ->add('denominacion', 'filter_text',array(
                         'attr'=> array('class'=>'form-control')
                     ))
         ;
@@ -63,7 +54,7 @@ class PostFilterType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Home\BackendBundle\Entity\Post'
+            'data_class' => 'Home\BackendBundle\Entity\Category'
         ));
     }
 
@@ -72,6 +63,6 @@ class PostFilterType extends AbstractType
      */
     public function getName()
     {
-        return 'home_backendbundle_postfiltertype';
+        return 'home_backendbundle_categoryfiltertype';
     }
 }

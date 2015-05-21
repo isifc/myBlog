@@ -14,7 +14,7 @@ class __TwigTemplate_f7c131e13b81e2d33ef5519d1d69db9accf757a0ebc76a6327a9257968e
             'stylesheets' => array($this, 'block_stylesheets'),
             'menu' => array($this, 'block_menu'),
             'page' => array($this, 'block_page'),
-            'javascript' => array($this, 'block_javascript'),
+            'javascripts' => array($this, 'block_javascripts'),
         );
     }
 
@@ -42,19 +42,20 @@ class __TwigTemplate_f7c131e13b81e2d33ef5519d1d69db9accf757a0ebc76a6327a9257968e
         // line 12
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mwsimplecrudgenerator/css/bootstrap-checkbox.css"), "html", null, true);
         echo "\" rel=\"stylesheet\">
+    <link href=\"//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css\" rel=\"stylesheet\" />
     <style>
         body {
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         }
     </style>
     <link href=\"";
-        // line 18
+        // line 19
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mwsimplecrudgenerator/css/crud.css"), "html", null, true);
         echo "\" rel=\"stylesheet\">
     ";
-        // line 19
-        $this->displayBlock('stylesheets', $context, $blocks);
         // line 20
+        $this->displayBlock('stylesheets', $context, $blocks);
+        // line 23
         echo "    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src=\"http://html5shim.googlecode.com/svn/trunk/html5.js\"></script>
@@ -62,7 +63,7 @@ class __TwigTemplate_f7c131e13b81e2d33ef5519d1d69db9accf757a0ebc76a6327a9257968e
 
     <!-- Le fav and touch icons -->
     <link rel=\"shortcut icon\" href=\"";
-        // line 26
+        // line 29
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mwsimplecrudgenerator/images/favicon.ico"), "html", null, true);
         echo "\">
 </head>
@@ -71,26 +72,26 @@ class __TwigTemplate_f7c131e13b81e2d33ef5519d1d69db9accf757a0ebc76a6327a9257968e
 
 <div class=\"container\">
     ";
-        // line 32
+        // line 35
         $this->displayBlock('menu', $context, $blocks);
-        // line 33
+        // line 36
         echo "
     ";
-        // line 34
+        // line 37
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "session", array()), "flashbag", array()), "all", array(), "method"));
         foreach ($context['_seq'] as $context["type"] => $context["flashMessages"]) {
-            // line 35
+            // line 38
             echo "        ";
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable($context["flashMessages"]);
             foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
-                // line 36
+                // line 39
                 echo "            <div class=\"alert alert-";
                 echo twig_escape_filter($this->env, $context["type"], "html", null, true);
                 echo "\">
                 ";
-                // line 37
+                // line 40
                 echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans($context["flashMessage"], array(), "MWSimpleCrudGeneratorBundle"), "html", null, true);
                 echo "
             </div>
@@ -99,40 +100,51 @@ class __TwigTemplate_f7c131e13b81e2d33ef5519d1d69db9accf757a0ebc76a6327a9257968e
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 40
+            // line 43
             echo "    ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['type'], $context['flashMessages'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 41
+        // line 44
         echo "
     ";
-        // line 42
+        // line 45
         $this->displayBlock('page', $context, $blocks);
-        // line 43
+        // line 46
         echo "
 </div>
 
 
 <script src=\"";
-        // line 47
+        // line 50
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mwsimplecrudgenerator/js/jquery.min.js"), "html", null, true);
         echo "\"></script>
 <script src=\"";
-        // line 48
+        // line 51
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mwsimplecrudgenerator/js/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
 <script src=\"";
-        // line 49
+        // line 52
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mwsimplecrudgenerator/js/bootstrap-checkbox.js"), "html", null, true);
         echo "\"></script>
+<script src=\"";
+        // line 53
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/Select2Bundle/js/bootstrap-checkbox.js"), "html", null, true);
+        echo "\"></script>
+<script src=\"//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js\"></script>
+<script src=\"";
+        // line 55
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("PinanoSelect2Bundle/Resources/public/js/i18n/es.js"), "html", null, true);
+        echo "\"></script>
+
 
 ";
-        // line 51
-        $this->displayBlock('javascript', $context, $blocks);
-        // line 52
-        echo "</body>
+        // line 58
+        $this->displayBlock('javascripts', $context, $blocks);
+        // line 62
+        echo "
+</body>
 </html>";
     }
 
@@ -142,24 +154,31 @@ class __TwigTemplate_f7c131e13b81e2d33ef5519d1d69db9accf757a0ebc76a6327a9257968e
         echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("views.layout.bannersadmin", array(), "MWSimpleCrudGeneratorBundle"), "html", null, true);
     }
 
-    // line 19
+    // line 20
     public function block_stylesheets($context, array $blocks = array())
     {
+        // line 21
+        echo "       
+    ";
     }
 
-    // line 32
+    // line 35
     public function block_menu($context, array $blocks = array())
     {
     }
 
-    // line 42
+    // line 45
     public function block_page($context, array $blocks = array())
     {
     }
 
-    // line 51
-    public function block_javascript($context, array $blocks = array())
+    // line 58
+    public function block_javascripts($context, array $blocks = array())
     {
+        // line 59
+        echo "   
+   
+";
     }
 
     public function getTemplateName()
@@ -174,6 +193,6 @@ class __TwigTemplate_f7c131e13b81e2d33ef5519d1d69db9accf757a0ebc76a6327a9257968e
 
     public function getDebugInfo()
     {
-        return array (  161 => 51,  156 => 42,  151 => 32,  146 => 19,  140 => 5,  135 => 52,  133 => 51,  128 => 49,  124 => 48,  120 => 47,  114 => 43,  112 => 42,  109 => 41,  103 => 40,  94 => 37,  89 => 36,  84 => 35,  80 => 34,  77 => 33,  75 => 32,  66 => 26,  58 => 20,  56 => 19,  52 => 18,  43 => 12,  39 => 11,  30 => 5,  24 => 1,);
+        return array (  179 => 59,  176 => 58,  171 => 45,  166 => 35,  161 => 21,  158 => 20,  152 => 5,  146 => 62,  144 => 58,  138 => 55,  133 => 53,  129 => 52,  125 => 51,  121 => 50,  115 => 46,  113 => 45,  110 => 44,  104 => 43,  95 => 40,  90 => 39,  85 => 38,  81 => 37,  78 => 36,  76 => 35,  67 => 29,  59 => 23,  57 => 20,  53 => 19,  43 => 12,  39 => 11,  30 => 5,  24 => 1,);
     }
 }
